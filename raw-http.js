@@ -1,3 +1,7 @@
+/**
+ * Node low level apis require more work to be done
+ * Therefore you are supposed to use the npm libraries in node ecosystem
+ */
 const http = require('http')
 
 const url =
@@ -5,14 +9,17 @@ const url =
 
 let fetchedData = ''
 
+// we can can have the different parts of the response through this low level builtin api
 const request = http.request(url, (response) => {
+  // fetching the body of the response
   response.on('data', (chunk) => {
     //  console.log(chunk) It is a buffer
     fetchedData = fetchedData + chunk.toString()
   })
 
   response.on('end', () => {
-    console.log(fetchedData)
+    const body = JSON.parse(fetchedData)
+    console.log(body)
   })
 })
 
